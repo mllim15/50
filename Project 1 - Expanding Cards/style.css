@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Muli', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    overflow: hidden; /* so it doesn't show scrollbars by default */
+    margin: 0;
+}
+
+.container {
+    /* puts the children (all the divs) into a row horizontally */
+    display: flex;
+    /* if we wanted them vertically on top of each other we would add this: 
+    flex-direction: column; */
+    width: 90vw;
+}
+
+.panel {
+    background-size: auto 100%;
+    /* to preserve rounded corners on large screens change to
+    background-size: cover */
+
+    background-position: center;
+    /* background does not repeat */
+
+    background-repeat: no-repeat;
+    height: 80vh;
+    border-radius: 3em;
+
+    /* color of text inside */
+    color: whitesmoke;
+
+    /* cursor when you hover over the panels */
+    cursor: pointer;
+
+    /* initial width of the panels 
+    we will change this value when a panel is active */
+    flex: 0.5;
+
+    margin: 10px;
+    position: relative;
+    transition: flex 0.7s ease-in;
+}
+
+.panel h3 {
+    font-size: 24px;
+    position: absolute;
+    /* place h3 20px from bottom and left */
+    bottom: 20px;
+    left: 20px;
+    margin: 0;
+    /* don't want h3s to show unless panel is active 
+    so setting opacity to 0 makes it invisible */
+    opacity: 0;
+}
+
+.panel.active {
+    flex: 5;
+}
+
+.panel.active h3 {
+    opacity: 1;
+    /* 0.5s is delay */
+    transition: opacity 0.3s ease-in 0.5s;
+}
+
+/* following styles will only execute if the screen
+is under 480px */
+@media(max-width: 480px) {
+    .container {
+        width: 100vw;
+    }
+
+    /* hide the fourth and fifth panels */
+    .panel:nth-of-type(4), .panel:nth-of-type(5) {
+         display: none;
+    }
+}
