@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Muli&display=swap');
+
+/* variables */
+:root {
+    --line-fill: aquamarine;
+    --line-empty: lightgray;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Muli', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden; /* so it doesn't show scrollbars by default */
+    margin: 0;
+    background-color: lightcyan;
+}
+
+.container {
+    text-align: center;
+}
+
+.progress-container {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    max-width: 100%;
+    width: 350px;
+    margin-bottom: 30px;
+}
+
+/* the gray line represents the empty line */
+.progress-container::before {
+    /* need to add content when you use before or after pseudo elements */
+    content: '';
+    background-color: var(--line-empty);
+    position: absolute;
+    top: 50%;
+    left: 0;
+    /* starting point of line, when next is clicked this width will increase */
+    width: 100%;
+    height: 5px;
+    /* move the line so that it goes through the middle of the numbers */
+    transform: translateY(-50%);
+    /* make the line behind the numbers */
+    z-index: -1;
+}
+
+.progress {
+    background-color: var(--line-fill);
+    position: absolute;
+    top: 50%;
+    left: 0;
+    /* starting point of line, when next is clicked this width will increase */
+    width: 0%;
+    height: 5px;
+    /* move the line so that it goes through the middle of the numbers */
+    transform: translateY(-50%);
+    /* make the line behind the numbers */
+    z-index: -1;
+    /* line transitions when previous or next button is clicked */
+    transition: 0.4s ease;
+}
+
+.circle {
+    border-radius: 50%;
+    border: 3px solid var(--line-empty);
+    height: 30px;
+    width: 30px;
+    background-color: white;
+    color: gray;
+    /* put the numbers in the middle of the circle */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.4s ease;
+}
+
+.circle.active {
+    border-color: var(--line-fill);
+}
+
+.button {
+    background-color: var(--line-fill);
+    color: white;
+    border: 0;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: inherit;
+    padding: 10px 30px;
+    margin: 5px 10px;
+    font-size: 15px;
+}
+
+.button:active {
+    transform: scale(0.95);
+}
+
+.button:focus {
+    outline: none;
+}
+
+.button:disabled {
+    background-color: var(--line-empty);
+    /* disable the button so user can't click */
+    cursor: not-allowed;
+}
